@@ -1,10 +1,9 @@
 set(PACKAGE_NAME "ncInvaders")
 set(PACKAGE_EXE_NAME "ncinvaders")
-set(PACKAGE_ICON_NAME ${PACKAGE_NAME})
+set(PACKAGE_VENDOR "Angelo Theodorou")
 set(PACKAGE_DESCRIPTION "A simplified version of Space Invaders made with the nCine")
-set(PACKAGE_AUTHOR_MAIL "encelo@gmail.com")
-set(PACKAGE_DESKTOP_FILE "io.github.ncine.ncinvaders.desktop")
-set(PACKAGE_JAVA_URL "io/github/ncine/ncinvaders")
+set(PACKAGE_HOMEPAGE "https://ncine.github.io")
+set(PACKAGE_REVERSE_DNS "io.github.ncine.ncinvaders")
 
 set(PACKAGE_SOURCES
 	src/invaders.h
