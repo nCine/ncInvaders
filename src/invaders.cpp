@@ -33,7 +33,7 @@ void MyEventHandler::onPreInit(nc::AppConfiguration &config)
 	config.windowTitle = "ncInvaders";
 	config.windowIconFilename = "icon48.png";
 
-	config.setResolution(1920, 1080);
+	config.resolution.set(1920, 1080);
 }
 
 void MyEventHandler::onInit()

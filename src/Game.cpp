@@ -20,8 +20,8 @@ Game::Game()
 	rocketTexture_ = nctl::makeUnique<nc::Texture>((nc::IFile::dataPath() + Conf::RocketSpriteImage).data());
 	playerTexture_ = nctl::makeUnique<nc::Texture>((nc::IFile::dataPath() + Conf::PlayerSpriteImage).data());
 
-	font_ = nctl::makeUnique<nc::Font>((nc::IFile::dataPath() + Conf::FontTextureFile).data(),
-	                                   (nc::IFile::dataPath() + Conf::FontFntFile).data());
+	font_ = nctl::makeUnique<nc::Font>((nc::IFile::dataPath() + Conf::FontFntFile).data(),
+	                                   (nc::IFile::dataPath() + Conf::FontTextureFile).data());
 
 	screenText_ = nctl::makeUnique<nc::TextNode>(&nc::theApplication().rootNode(), font_.get());
 	screenText_->setPosition((nc::theApplication().width() - screenText_->width()) * 0.5f,
