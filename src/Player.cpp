@@ -26,10 +26,10 @@ void Player::move(float interval)
 void Player::shoot()
 {
 	// Check if enough time has passed before shooting again
-	if (shootTimer_.interval() >= Conf::PlayerShootTime)
+	if (lastShootTime_.secondsSince() >= Conf::PlayerShootTime)
 	{
 		rocketPool_->shoot(sprite_.x, sprite_.y + sprite_.height() * 0.5f);
-		shootTimer_.start();
+		lastShootTime_ = nc::TimeStamp::now();
 	}
 }
 
@@ -42,5 +42,5 @@ void Player::reset()
 	lives_ = Conf::PlayerStartingLives;
 
 	// Ready to shoot
-	shootTimer_.start();
+	lastShootTime_ = nc::TimeStamp::now();
 }

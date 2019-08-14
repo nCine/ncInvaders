@@ -5,7 +5,7 @@
 #include "CollisionManager.h"
 
 #include <ncine/Texture.h>
-#include <ncine/Timer.h>
+#include <ncine/TimeStamp.h>
 
 namespace nc = ncine;
 
@@ -55,7 +55,7 @@ class EnemyPool
 
 	nc::Texture *enemyTextureOne_;
 	nc::Texture *enemyTextureTwo_;
-	nc::Timer shootTimer_;
+	nc::TimeStamp lastShootTime_;
 
 	EnemyPool(const EnemyPool &) = delete;
 	EnemyPool &operator=(const EnemyPool &) = delete;

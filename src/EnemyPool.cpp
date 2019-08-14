@@ -42,7 +42,7 @@ void EnemyPool::reset()
 		enemies_[i].setEnabled(false);
 
 	// Ready to shoot
-	shootTimer_.start();
+	lastShootTime_ = nc::TimeStamp::now();
 }
 
 void EnemyPool::update(float interval)
@@ -54,11 +54,11 @@ void EnemyPool::update(float interval)
 	yMax_ = 0.0f;
 
 	// Check if enough time has passed before shooting again and randomize the shooter
-	if (enemies_.acquiredSize() > 0 && shootTimer_.interval() >= Conf::EnemyShootTime)
+	if (enemies_.acquiredSize() > 0 && lastShootTime_.secondsSince() >= Conf::EnemyShootTime)
 	{
 		const unsigned int shootIdx = nc::random().integer(0, enemies_.acquiredSize());
 		bombPool_->shoot(enemies_[shootIdx].x, enemies_[shootIdx].y - enemies_[shootIdx].height() * 0.5f);
-		shootTimer_.start();
+		lastShootTime_ = nc::TimeStamp::now();
 	}
 
 	const nc::Vector2f halfEnemySize(enemies_.spriteWidth() * 0.5f, enemies_.spriteHeight() * 0.5f);

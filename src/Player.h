@@ -4,7 +4,7 @@
 #include "CollisionManager.h"
 
 #include <ncine/Sprite.h>
-#include <ncine/Timer.h>
+#include <ncine/TimeStamp.h>
 
 namespace nc = ncine;
 
@@ -36,7 +36,7 @@ class Player
 	ProjectilePool *rocketPool_;
 
 	nc::Sprite sprite_;
-	nc::Timer shootTimer_;
+	nc::TimeStamp lastShootTime_;
 
 	Player(const Player &) = delete;
 	Player &operator=(const Player &) = delete;
