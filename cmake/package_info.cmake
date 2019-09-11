@@ -1,6 +1,7 @@
 set(PACKAGE_NAME "ncInvaders")
 set(PACKAGE_EXE_NAME "ncinvaders")
 set(PACKAGE_VENDOR "Angelo Theodorou")
+set(PACKAGE_COPYRIGHT "Copyright ©2016-2019 ${PACKAGE_VENDOR}")
 set(PACKAGE_DESCRIPTION "A simplified version of Space Invaders made with the nCine")
 set(PACKAGE_HOMEPAGE "https://ncine.github.io")
 set(PACKAGE_REVERSE_DNS "io.github.ncine.ncinvaders")
