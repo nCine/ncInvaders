@@ -9,7 +9,6 @@
 #include <ncine/Texture.h>
 #include <ncine/Sprite.h>
 #include <ncine/TextNode.h>
-#include <ncine/IFile.h> // for dataPath()
 
 nc::IAppEventHandler *createAppEventHandler()
 {

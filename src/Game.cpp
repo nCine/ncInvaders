@@ -8,20 +8,20 @@
 #include <ncine/IInputManager.h>
 #include <ncine/Font.h>
 #include <ncine/TextNode.h>
-#include <ncine/IFile.h>
+#include <ncine/FileSystem.h>
 #include <nctl/String.h>
 
 Game::Game()
     : state_(GameState::START), screenString_(128), playerMovement_(PlayerMovement::STOP)
 {
-	bombTexture_ = nctl::makeUnique<nc::Texture>((nc::IFile::dataPath() + Conf::BombSpriteImage).data());
-	enemy1Texture_ = nctl::makeUnique<nc::Texture>((nc::IFile::dataPath() + Conf::EnemySpriteOneImage).data());
-	enemy2Texture_ = nctl::makeUnique<nc::Texture>((nc::IFile::dataPath() + Conf::EnemySpriteTwoImage).data());
-	rocketTexture_ = nctl::makeUnique<nc::Texture>((nc::IFile::dataPath() + Conf::RocketSpriteImage).data());
-	playerTexture_ = nctl::makeUnique<nc::Texture>((nc::IFile::dataPath() + Conf::PlayerSpriteImage).data());
+	bombTexture_ = nctl::makeUnique<nc::Texture>(nc::fs::joinPath(nc::fs::dataPath(), Conf::BombSpriteImage).data());
+	enemy1Texture_ = nctl::makeUnique<nc::Texture>(nc::fs::joinPath(nc::fs::dataPath(), Conf::EnemySpriteOneImage).data());
+	enemy2Texture_ = nctl::makeUnique<nc::Texture>(nc::fs::joinPath(nc::fs::dataPath(), Conf::EnemySpriteTwoImage).data());
+	rocketTexture_ = nctl::makeUnique<nc::Texture>(nc::fs::joinPath(nc::fs::dataPath(), Conf::RocketSpriteImage).data());
+	playerTexture_ = nctl::makeUnique<nc::Texture>(nc::fs::joinPath(nc::fs::dataPath(), Conf::PlayerSpriteImage).data());
 
-	font_ = nctl::makeUnique<nc::Font>((nc::IFile::dataPath() + Conf::FontFntFile).data(),
-	                                   (nc::IFile::dataPath() + Conf::FontTextureFile).data());
+	font_ = nctl::makeUnique<nc::Font>(nc::fs::joinPath(nc::fs::dataPath(), Conf::FontFntFile).data(),
+	                                   nc::fs::joinPath(nc::fs::dataPath(), Conf::FontTextureFile).data());
 
 	screenText_ = nctl::makeUnique<nc::TextNode>(&nc::theApplication().rootNode(), font_.get());
 	screenText_->setPosition((nc::theApplication().width() - screenText_->width()) * 0.5f,
