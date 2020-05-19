@@ -32,11 +32,7 @@ class SpritePool
 	void releaseAll();
 
 	/// Subscript operator to make the pool act as an ordinary array
-	inline nc::Sprite &operator[](unsigned int i)
-	{
-		ASSERT(i < nextFree_);
-		return *sprites_[i];
-	}
+	inline nc::Sprite &operator[](unsigned int i) { return *sprites_[i]; }
 
 	/// Returns the total size of the pool
 	inline unsigned int totalSize() const { return size_; }

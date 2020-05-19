@@ -12,7 +12,7 @@ SpritePool::SpritePool(unsigned int size, nc::Texture *texture)
 
 	sprites_.setCapacity(size);
 	for (unsigned int i = 0; i < size; i++)
-		sprites_[i] = nctl::makeUnique<nc::Sprite>(&nc::theApplication().rootNode(), texture);
+		sprites_.pushBack(nctl::makeUnique<nc::Sprite>(&nc::theApplication().rootNode(), texture));
 }
 
 nc::Sprite *SpritePool::acquire()
