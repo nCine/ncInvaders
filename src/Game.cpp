@@ -25,7 +25,7 @@ Game::Game()
 
 	screenText_ = nctl::makeUnique<nc::TextNode>(&nc::theApplication().rootNode(), font_.get());
 	screenText_->setPosition((nc::theApplication().width() - screenText_->width()) * 0.5f,
-	                         nc::theApplication().height() - screenText_->fontLineHeight() * 0.5f * 2.0f);
+	                         nc::theApplication().height() - screenText_->lineHeight() * 0.5f * 2.0f);
 	screenText_->setColor(255, 255, 0, 255);
 	screenText_->setAlignment(nc::TextNode::Alignment::CENTER);
 
