@@ -15,10 +15,7 @@ bool ProjectilePool::shoot(float x, float y)
 	nc::Sprite *projectile = projectiles_.acquire();
 
 	if (projectile)
-	{
-		projectile->x = x;
-		projectile->y = y;
-	}
+		projectile->setPosition(x, y);
 
 	// Was a projectile found and dropped?
 	return (projectile != nullptr);
@@ -29,8 +26,8 @@ void ProjectilePool::updateBombs(float interval)
 	// Traverse the array backwards to release sprites
 	for (int i = projectiles_.acquiredSize() - 1; i >= 0; i--)
 	{
-		projectiles_[i].y -= roundf(interval * Conf::BombSpeed);
-		if (projectiles_[i].y + projectiles_.spriteHeight() * 0.5f < 0.0f)
+		projectiles_[i].moveY(-roundf(interval * Conf::BombSpeed));
+		if (projectiles_[i].position().y + projectiles_.spriteHeight() * 0.5f < 0.0f)
 			projectiles_.release(i);
 	}
 }
@@ -40,8 +37,8 @@ void ProjectilePool::updateRockets(float interval)
 	// Traverse the array backwards to release sprites
 	for (int i = projectiles_.acquiredSize() - 1; i >= 0; i--)
 	{
-		projectiles_[i].y += roundf(interval * Conf::RocketSpeed);
-		if (projectiles_[i].y - projectiles_.spriteHeight() * 0.5f > nc::theApplication().height())
+		projectiles_[i].moveY(roundf(interval * Conf::RocketSpeed));
+		if (projectiles_[i].position().y - projectiles_.spriteHeight() * 0.5f > nc::theApplication().height())
 			projectiles_.release(i);
 	}
 }

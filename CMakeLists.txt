@@ -1,7 +1,7 @@
 set(NCPROJECT_NAME "ncInvaders")
 set(NCPROJECT_EXE_NAME "ncinvaders")
 set(NCPROJECT_VENDOR "Angelo Theodorou")
-set(NCPROJECT_COPYRIGHT "Copyright ©2016-2021 ${NCPROJECT_VENDOR}")
+set(NCPROJECT_COPYRIGHT "Copyright ©2016-2022 ${NCPROJECT_VENDOR}")
 set(NCPROJECT_DESCRIPTION "A simplified version of Space Invaders made with the nCine")
 set(NCPROJECT_HOMEPAGE "https://ncine.github.io")
 set(NCPROJECT_REVERSE_DNS "io.github.ncine.ncinvaders")

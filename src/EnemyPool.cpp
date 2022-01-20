@@ -33,8 +33,8 @@ void EnemyPool::reset()
 	float paddingX = (nc::theApplication().width() * (1.0f - Conf::EnemyHMargin * 2.0f)) / width_;
 	for (unsigned int i = 0; i < size_; i++)
 	{
-		enemies_[i].x = (Conf::EnemyHMargin * nc::theApplication().width()) + paddingX * (i % width_) + paddingX * 0.5f * (i / width_ % 2);
-		enemies_[i].y = nc::theApplication().height() - enemies_[i].height() * (i / width_ + 0.5f); // Shift down vertically half the sprite size to make text readable
+		enemies_[i].setPositionX((Conf::EnemyHMargin * nc::theApplication().width()) + paddingX * (i % width_) + paddingX * 0.5f * (i / width_ % 2));
+		enemies_[i].setPositionY(nc::theApplication().height() - enemies_[i].height() * (i / width_ + 0.5f)); // Shift down vertically half the sprite size to make text readable
 		enemies_[i].setTexture((i % 2) ? enemyTextureOne_ : enemyTextureTwo_);
 		enemies_[i].setEnabled(true);
 	}
@@ -57,7 +57,8 @@ void EnemyPool::update(float interval)
 	if (enemies_.acquiredSize() > 0 && lastShootTime_.secondsSince() >= Conf::EnemyShootTime)
 	{
 		const unsigned int shootIdx = nc::random().integer(0, enemies_.acquiredSize());
-		bombPool_->shoot(enemies_[shootIdx].x, enemies_[shootIdx].y - enemies_[shootIdx].height() * 0.5f);
+		nc::Sprite &enemy = enemies_[shootIdx];
+		bombPool_->shoot(enemy.position().x, enemy.position().y - enemies_[shootIdx].height() * 0.5f);
 		lastShootTime_ = nc::TimeStamp::now();
 	}
 
@@ -65,31 +66,32 @@ void EnemyPool::update(float interval)
 	for (unsigned int i = 0; i < enemies_.acquiredSize(); i++)
 	{
 		// Update the bounding box
-		if (enemies_[i].x - halfEnemySize.x < xMin_)
-			xMin_ = enemies_[i].x - halfEnemySize.x;
-		if (enemies_[i].x + halfEnemySize.x > xMax_)
-			xMax_ = enemies_[i].x + halfEnemySize.x;
-		if (enemies_[i].y - halfEnemySize.y < yMin_)
-			yMin_ = enemies_[i].y - halfEnemySize.y;
-		if (enemies_[i].y + halfEnemySize.y > yMax_)
-			yMax_ = enemies_[i].y + halfEnemySize.y;
+		nc::Sprite &enemy = enemies_[i];
+		if (enemy.position().x - halfEnemySize.x < xMin_)
+			xMin_ = enemy.position().x - halfEnemySize.x;
+		if (enemy.position().x + halfEnemySize.x > xMax_)
+			xMax_ = enemy.position().x + halfEnemySize.x;
+		if (enemy.position().y - halfEnemySize.y < yMin_)
+			yMin_ = enemy.position().y - halfEnemySize.y;
+		if (enemy.position().y + halfEnemySize.y > yMax_)
+			yMax_ = enemy.position().y + halfEnemySize.y;
 
 		switch (state_)
 		{
 			case MOVE_RIGHT:
 			{
-				enemies_[i].x += roundf(interval * horizontalSpeed_);
+				enemy.moveX(roundf(interval * horizontalSpeed_));
 				break;
 			}
 			case MOVE_LEFT:
 			{
-				enemies_[i].x -= roundf(interval * horizontalSpeed_);
+				enemy.moveX(-roundf(interval * horizontalSpeed_));
 				break;
 			}
 			case MOVE_DOWNRIGHT:
 			case MOVE_DOWNLEFT:
 			{
-				enemies_[i].y -= roundf(verticalSpeed_);
+				enemy.moveY(-roundf(verticalSpeed_));
 				horizontalSpeed_ *= Conf::EnemySpeedIncrease;
 				verticalSpeed_ *= Conf::EnemySpeedIncrease;
 				break;

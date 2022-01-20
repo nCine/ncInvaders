@@ -18,7 +18,7 @@ bool CollisionManager::performCollisions(ProjectilePool *rocketPool, EnemyPool *
 
 	for (int rocketIdx = rockets.acquiredSize() - 1; rocketIdx >= 0; rocketIdx--)
 	{
-		const nc::Sprite &r = rockets[rocketIdx];
+		const nc::Vector2f r = rockets[rocketIdx].position();
 
 		// Skip check for rockets outside the bounding box of alive enemies
 		if (r.x + halfRocketSize.x < enemyPool->xMin_ ||
@@ -31,7 +31,7 @@ bool CollisionManager::performCollisions(ProjectilePool *rocketPool, EnemyPool *
 
 		for (int enemyIdx = enemies.acquiredSize() - 1; enemyIdx >= 0; enemyIdx--)
 		{
-			const nc::Sprite &e = enemies[enemyIdx];
+			const nc::Vector2f e = enemies[enemyIdx].position();
 
 			if (r.x + halfRocketSize.x >= e.x - halfEnemySize.x && r.x - halfRocketSize.x <= e.x + halfEnemySize.x &&
 			    r.y + halfRocketSize.y >= e.y - halfEnemySize.y && r.y - halfRocketSize.y <= e.y + halfEnemySize.y)
@@ -52,13 +52,13 @@ bool CollisionManager::performCollisions(Player *player, ProjectilePool *bombPoo
 	ASSERT(bombPool);
 
 	SpritePool &bombs = bombPool->projectiles_;
-	const nc::Sprite &p = player->sprite_;
-	const nc::Vector2f halfPlayerSize(p.width() * 0.5f, p.height() * 0.5f);
+	const nc::Vector2f p = player->sprite_.position();
+	const nc::Vector2f halfPlayerSize(player->sprite_.width() * 0.5f, player->sprite_.height() * 0.5f);
 	const nc::Vector2f halfBombSize(bombs.spriteWidth() * 0.5f, bombs.spriteHeight() * 0.5f);
 
 	for (int bombIdx = bombs.acquiredSize() - 1; bombIdx >= 0; bombIdx--)
 	{
-		const nc::Sprite &b = bombs[bombIdx];
+		const nc::Vector2f b = bombs[bombIdx].position();
 
 		if (p.x + halfPlayerSize.x >= b.x - halfBombSize.x && p.x - halfPlayerSize.x <= b.x + halfBombSize.x &&
 		    p.y + halfPlayerSize.y >= b.y - halfBombSize.y && p.y - halfPlayerSize.y <= b.y + halfBombSize.y)
@@ -77,8 +77,8 @@ bool CollisionManager::performCollisions(Player *player, EnemyPool *enemyPool)
 	ASSERT(enemyPool);
 
 	SpritePool &enemies = enemyPool->enemies_;
-	const nc::Sprite &p = player->sprite_;
-	const nc::Vector2f halfPlayerSize(p.width() * 0.5f, p.height() * 0.5f);
+	const nc::Vector2f p = player->sprite_.position();
+	const nc::Vector2f halfPlayerSize(player->sprite_.width() * 0.5f, player->sprite_.height() * 0.5f);
 	const nc::Vector2f halfEnemySize(enemies.spriteWidth() * 0.5f, enemies.spriteHeight() * 0.5f);
 
 	// Skip check if the player is outside the bounding box of alive enemies
@@ -92,7 +92,7 @@ bool CollisionManager::performCollisions(Player *player, EnemyPool *enemyPool)
 
 	for (int enemyIdx = enemies.acquiredSize() - 1; enemyIdx >= 0; enemyIdx--)
 	{
-		const nc::Sprite &e = enemies[enemyIdx];
+		const nc::Vector2f e = enemies[enemyIdx].position();
 
 		if (p.x + halfPlayerSize.x >= e.x - halfEnemySize.x && p.x - halfPlayerSize.x <= e.x + halfEnemySize.x &&
 		    p.y + halfPlayerSize.y >= e.y - halfEnemySize.y && p.y - halfPlayerSize.y <= e.y + halfEnemySize.y)

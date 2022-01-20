@@ -14,13 +14,13 @@ Player::Player(ProjectilePool *rocketPool, nc::Texture *playerTexture)
 
 void Player::move(float interval)
 {
-	sprite_.x += roundf(interval * Conf::PlayerSpeed);
+	sprite_.moveX(roundf(interval * Conf::PlayerSpeed));
 
 	// Clamping to window horizontal borders
-	if (sprite_.x < 0.0f)
-		sprite_.x = 0.0f;
-	else if (sprite_.x >= nc::theApplication().width() - sprite_.width())
-		sprite_.x = nc::theApplication().width() - sprite_.width();
+	if (sprite_.position().x < 0.0f)
+		sprite_.setPositionX(0.0f);
+	else if (sprite_.position().x >= nc::theApplication().width() - sprite_.width())
+		sprite_.setPositionX(nc::theApplication().width() - sprite_.width());
 }
 
 void Player::shoot()
@@ -28,7 +28,7 @@ void Player::shoot()
 	// Check if enough time has passed before shooting again
 	if (lastShootTime_.secondsSince() >= Conf::PlayerShootTime)
 	{
-		rocketPool_->shoot(sprite_.x, sprite_.y + sprite_.height() * 0.5f);
+		rocketPool_->shoot(sprite_.position().x, sprite_.position().y + sprite_.height() * 0.5f);
 		lastShootTime_ = nc::TimeStamp::now();
 	}
 }
@@ -36,8 +36,8 @@ void Player::shoot()
 void Player::reset()
 {
 	// Centered at the bottom of the window
-	sprite_.x = (nc::theApplication().width() - sprite_.width()) * 0.5f;
-	sprite_.y = sprite_.height();
+	sprite_.setPositionX((nc::theApplication().width() - sprite_.width()) * 0.5f);
+	sprite_.setPositionY(sprite_.height());
 
 	lives_ = Conf::PlayerStartingLives;
 
