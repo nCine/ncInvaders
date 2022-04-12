@@ -23,7 +23,11 @@ Game::Game()
 	font_ = nctl::makeUnique<nc::Font>(nc::fs::joinPath(nc::fs::dataPath(), Conf::FontFntFile).data(),
 	                                   nc::fs::joinPath(nc::fs::dataPath(), Conf::FontTextureFile).data());
 
+	// Ignore inter-nodes drawing order to allow batching without a texture atlas
+	nc::theApplication().rootNode().setVisitOrderState(nc::SceneNode::VisitOrderState::DISABLED);
+
 	screenText_ = nctl::makeUnique<nc::TextNode>(&nc::theApplication().rootNode(), font_.get());
+	screenText_->setLayer(1);
 	screenText_->setPosition((nc::theApplication().width() - screenText_->width()) * 0.5f,
 	                         nc::theApplication().height() - screenText_->lineHeight() * 0.5f * 2.0f);
 	screenText_->setColor(255, 255, 0, 255);
