@@ -91,7 +91,7 @@ void MyEventHandler::onKeyPressed(const nc::KeyboardEvent &event)
 
 void MyEventHandler::onKeyReleased(const nc::KeyboardEvent &event)
 {
-	if (event.sym == nc::KeySym::ESCAPE || event.sym == nc::KeySym::Q)
+	if (event.sym == nc::KeySym::ESCAPE)
 		nc::theApplication().quit();
 	else if (event.sym == nc::KeySym::P)
 		game_->togglePause();
