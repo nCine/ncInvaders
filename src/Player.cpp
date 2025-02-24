@@ -12,9 +12,9 @@ Player::Player(ProjectilePool *rocketPool, nc::Texture *playerTexture)
 	reset();
 }
 
-void Player::move(float interval)
+void Player::move(float frameTime)
 {
-	sprite_.moveX(roundf(interval * Conf::PlayerSpeed));
+	sprite_.moveX(roundf(frameTime * Conf::PlayerSpeed));
 
 	// Clamping to window horizontal borders
 	if (sprite_.position().x < 0.0f)

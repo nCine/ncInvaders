@@ -59,8 +59,8 @@ void MyEventHandler::onFrameStart()
 	else if (axisValue < -nc::IInputManager::LeftStickDeadZone)
 		game_->movePlayer(Game::PlayerMovement::LEFT);
 
-	const float interval = nc::theApplication().interval();
-	game_->update(interval);
+	const float frameTime = nc::theApplication().frameTime();
+	game_->update(frameTime);
 }
 
 #ifdef __ANDROID__

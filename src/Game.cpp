@@ -41,7 +41,7 @@ Game::Game()
 
 Game::~Game() = default;
 
-void Game::update(float interval)
+void Game::update(float frameTime)
 {
 	switch (state_)
 	{
@@ -65,17 +65,17 @@ void Game::update(float interval)
 			screenString_.format("Score: %u - Lives: %u", player_->score(), player_->lives());
 			screenText_->setString(screenString_);
 
-			bombPool_->updateBombs(interval);
+			bombPool_->updateBombs(frameTime);
 			bombPool_->draw();
-			enemyPool_->update(interval);
+			enemyPool_->update(frameTime);
 			enemyPool_->draw();
-			rocketPool_->updateRockets(interval);
+			rocketPool_->updateRockets(frameTime);
 			rocketPool_->draw();
 
 			if (playerMovement_ == PlayerMovement::RIGHT)
-				player_->move(interval);
+				player_->move(frameTime);
 			else if (playerMovement_ == PlayerMovement::LEFT)
-				player_->move(-interval);
+				player_->move(-frameTime);
 
 			bool rocketEnemyCollision = CollisionManager::performCollisions(rocketPool_.get(), enemyPool_.get());
 			bool bombPlayerCollision = CollisionManager::performCollisions(player_.get(), bombPool_.get());

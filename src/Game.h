@@ -47,7 +47,7 @@ class Game
 
 	Game();
 	~Game();
-	void update(float interval);
+	void update(float frameTime);
 	inline void reset() { state_ = GameState::START; }
 	void togglePause();
 

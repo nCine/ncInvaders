@@ -17,7 +17,7 @@ class Player
 	Player(ProjectilePool *rocketPool, nc::Texture *playerTexture);
 
 	/// Move the player by an amount specified by the time passed since last frame
-	void move(float interval);
+	void move(float frameTime);
 	void shoot();
 
 	inline unsigned int lives() const { return lives_; }

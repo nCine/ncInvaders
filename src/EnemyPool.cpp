@@ -45,7 +45,7 @@ void EnemyPool::reset()
 	lastShootTime_ = nc::TimeStamp::now();
 }
 
-void EnemyPool::update(float interval)
+void EnemyPool::update(float frameTime)
 {
 	// Bounding box of alive enemies
 	xMin_ = nc::theApplication().width();
@@ -80,12 +80,12 @@ void EnemyPool::update(float interval)
 		{
 			case MOVE_RIGHT:
 			{
-				enemy.moveX(roundf(interval * horizontalSpeed_));
+				enemy.moveX(roundf(frameTime * horizontalSpeed_));
 				break;
 			}
 			case MOVE_LEFT:
 			{
-				enemy.moveX(-roundf(interval * horizontalSpeed_));
+				enemy.moveX(-roundf(frameTime * horizontalSpeed_));
 				break;
 			}
 			case MOVE_DOWNRIGHT:

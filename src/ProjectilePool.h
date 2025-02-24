@@ -17,9 +17,9 @@ class ProjectilePool
 	bool shoot(float x, float y);
 
 	/// Updates positions and returns to the pool a bomb that goes beyond the bottom of the window
-	void updateBombs(float interval);
+	void updateBombs(float frameTime);
 	/// Updates positions and returns to the pool a rocket that goes beyond the top of the window
-	void updateRockets(float interval);
+	void updateRockets(float frameTime);
 
 	void draw();
 	void reset();

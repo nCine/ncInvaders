@@ -22,7 +22,7 @@ class EnemyPool
 	void reset();
 
 	/// Updates positions, transitions states and calculates the bounding box
-	void update(float interval);
+	void update(float frameTime);
 	/*! \note This is the only drawing method that contains logic to use more than a single sprite for pool entities */
 	void draw();
 

@@ -21,23 +21,23 @@ bool ProjectilePool::shoot(float x, float y)
 	return (projectile != nullptr);
 }
 
-void ProjectilePool::updateBombs(float interval)
+void ProjectilePool::updateBombs(float frameTime)
 {
 	// Traverse the array backwards to release sprites
 	for (int i = projectiles_.acquiredSize() - 1; i >= 0; i--)
 	{
-		projectiles_[i].moveY(-roundf(interval * Conf::BombSpeed));
+		projectiles_[i].moveY(-roundf(frameTime * Conf::BombSpeed));
 		if (projectiles_[i].position().y + projectiles_.spriteHeight() * 0.5f < 0.0f)
 			projectiles_.release(i);
 	}
 }
 
-void ProjectilePool::updateRockets(float interval)
+void ProjectilePool::updateRockets(float frameTime)
 {
 	// Traverse the array backwards to release sprites
 	for (int i = projectiles_.acquiredSize() - 1; i >= 0; i--)
 	{
-		projectiles_[i].moveY(roundf(interval * Conf::RocketSpeed));
+		projectiles_[i].moveY(roundf(frameTime * Conf::RocketSpeed));
 		if (projectiles_[i].position().y - projectiles_.spriteHeight() * 0.5f > nc::theApplication().height())
 			projectiles_.release(i);
 	}
